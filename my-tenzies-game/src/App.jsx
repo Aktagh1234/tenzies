@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import Die from "./components/Die"
 import Confetti from "react-confetti"
 import { nanoid } from "nanoid"
+import useWindowSize from "./hooks/useWindowSize"
 
 export default function App(){
 
