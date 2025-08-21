@@ -8,6 +8,7 @@ export default function App(){
 
     const[dice, setDice] = useState(generateAllNewDice())
     const buttonRef = useRef(null)
+    const { width, height } = useWindowSize()
 
     const gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value == dice[0].value)
 
@@ -58,8 +59,15 @@ export default function App(){
     )
 
     return (
+        <>
+        {gameWon && (
+            <Confetti
+                width={width}
+                height={height}
+                style={{ position: "fixed", top: 0, left: 0, zIndex: 1000, pointerEvents: "none" }}
+            />
+        )}
         <main>
-            {gameWon && <Confetti />}
             <div aria-live="polite" className="sr-only">
                 {gameWon && <p>Congratulations! You won! Press "New Game" to start the game.</p>}
             </div>
@@ -73,5 +81,6 @@ export default function App(){
         <button ref={buttonRef} className="roll-dice" onClick={rollDice}>{gameWon ? "New Game" : "Roll"}</button>
 
         </main>
+        </>
     )
 }
